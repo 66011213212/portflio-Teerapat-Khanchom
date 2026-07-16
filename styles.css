@@ -56,9 +56,33 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .portrait-frame img { aspect-ratio:4/5; object-fit:cover; filter:grayscale(100%) contrast(1.03); transition:.45s ease; mix-blend-mode:multiply; }
 .portrait-frame:hover img { filter:grayscale(0); mix-blend-mode:normal; transform:scale(1.02); }
 .portrait-label { position:absolute; z-index:3; right:0; bottom:0; background:var(--black); color:white; padding:14px 18px; font-size:11px; font-weight:800; letter-spacing:.08em; }
-.ticker { overflow:hidden; display:flex; width:max-content; background:var(--black); color:white; border-top:1px solid var(--black); border-bottom:1px solid var(--black); }
-.ticker div { padding:17px 0; font-family:"Archivo Black", sans-serif; font-size:clamp(22px,3vw,44px); white-space:nowrap; animation:ticker 28s linear infinite; }
-@keyframes ticker { to { transform:translateX(-100%); } }
+.ticker {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--black);
+  color: white;
+  border-top: 1px solid var(--black);
+  border-bottom: 1px solid var(--black);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ticker 28s linear infinite;
+}
+.ticker-track span {
+  flex: 0 0 auto;
+  padding: 17px 1.35em 17px 0;
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(22px, 3vw, 44px);
+  white-space: nowrap;
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 /* About summary */
 .about-summary {
@@ -407,6 +431,7 @@ body:has(a:hover) .cursor { width: 32px; height: 32px; }
 .mini-footer { background:var(--black); color:white; display:flex; justify-content:space-between; align-items:center; padding-top:35px; padding-bottom:35px; }
 .mini-footer a { font-weight:900; }
 .mini-footer p { margin:0; font-size:11px; }
+.project-page .mini-footer, .activity-page .mini-footer { justify-content:flex-end; }
 
 @media (max-width: 1100px) {
   .about-summary-inner { grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); }
@@ -1097,7 +1122,7 @@ body:has(a:hover) .cursor { width: 32px; height: 32px; }
   .portrait-frame::before { inset: 12px; border-radius: 14px; }
   .portrait-label { padding: 11px 13px; font-size: 9px; }
 
-  .ticker div { padding-block: 13px; font-size: 22px; }
+  .ticker-track span { padding-block: 13px; font-size: 22px; }
 
   .about-summary { padding-top: 72px; padding-bottom: 76px; }
   .about-summary-inner { grid-template-columns: 1fr; gap: 42px; }
@@ -1286,16 +1311,14 @@ svg {
 }
 
 /* Keep the moving text inside the viewport instead of making the page wider. */
-.ticker {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  overflow: hidden;
+.ticker-track {
+  min-width: max-content;
 }
 
-.ticker div {
-  flex: 0 0 auto;
-  width: max-content;
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
 }
 
 @supports (overflow: clip) {

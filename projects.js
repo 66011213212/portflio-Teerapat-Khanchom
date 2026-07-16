@@ -230,13 +230,13 @@ const PROJECTS = [
     cover: "assets/project-14-cover.jpg",
     previewVideo: "assets/14.mp4",
     fullVideoUrl: "",
-    role: "Gaffer",
-    intro: "ตัวอย่างหนังสั้นที่ร่วมกับเพื่อนทำหน้าที่ Gaffer ปัจจุบันอยู่ในช่วงลำดับภาพ ซึ่งผลงานเต็มจะฉายวันที่ 19 สิงหาคม 2569",
-    overview: "ภาพยนตร์สั้นที่ร่วมพัฒนาในตำแหน่ง Gaffer อยู่ในขั้นตอนการผลิต โดยมุ่งเน้นการออกแบบแสงเพื่อสร้างบรรยากาศและสนับสนุนการเล่าเรื่องผ่านภาพยนตร์",
+    role: "DOP / Gaffer",
+    intro: "ตัวอย่างหนังสั้นที่ร่วมกับเพื่อนทำหน้าที่ DOP / Gaffer ปัจจุบันอยู่ในช่วงลำดับภาพ ซึ่งผลงานเต็มจะฉายวันที่ 19 สิงหาคม 2569",
+    overview: "ภาพยนตร์สั้นที่ร่วมพัฒนาในตำแหน่ง DOP / Gaffer อยู่ในขั้นตอนการผลิต โดยมุ่งเน้นการออกแบบแสงเพื่อสร้างบรรยากาศและสนับสนุนการเล่าเรื่องผ่านภาพยนตร์",
     process: "ทำงานร่วมกับทีมกำกับภาพในการวางแนวทางแสงของแต่ละฉาก เตรียมอุปกรณ์ไฟ ทดลองแสง และควบคุมทิศทางของแสงให้สอดคล้องกับ Mood & Tone ของเรื่อง",
-    contribution: "รับผิดชอบตำแหน่ง Gaffer ดูแลการจัดแสงภายในกองถ่าย ควบคุมอุปกรณ์และการทำงานของทีมไฟ พร้อมปรับแก้แสงหน้างานเพื่อให้ได้ภาพตามแนวทางที่กำหนด",
+    contribution: "รับผิดชอบตำแหน่ง DOP / Gaffer ดูแลการจัดแสงภายในกองถ่าย ควบคุมอุปกรณ์และการทำงานของทีมไฟ คอยแนะนำ Movement Camera พร้อมปรับแก้แสงหน้างานเพื่อให้ได้ภาพตามแนวทางที่กำหนด",
     credits: ["Software: DaVinci Resolve", "Source: [กล้อง / Log profile]", "Delivery: [Rec.709 / อื่น ๆ]"],
-    gallery: ["assets/project-13-gallery-1.jpg", "assets/project-13-gallery-2.jpg", "assets/project-13-gallery-3.jpg"]
+    gallery: ["assets/project-14-gallery-1.jpg", "assets/project-14-gallery-2.jpg", "assets/project-14-gallery-3.jpg"]
   },
   {
     id: "project-15",
@@ -253,7 +253,7 @@ const PROJECTS = [
     process: "ร่วมวางแนวทางภาพกับทีมกำกับ ออกแบบมุมกล้อง การจัดแสง และองค์ประกอบภาพ เพื่อสร้าง Mood & Tone ให้สอดคล้องกับอารมณ์และแนวคิดของเรื่อง",
     contribution: "รับผิดชอบตำแหน่ง Director of Photography (DOP) ดูแลการออกแบบภาพ การวางมุมกล้อง การควบคุมแสง และคุณภาพของภาพระหว่างการถ่ายทำ เพื่อสนับสนุนการเล่าเรื่องผ่านภาพยนตร์",
     credits: ["Software: DaVinci Resolve", "Source: [กล้อง / Log profile]", "Delivery: [Rec.709 / อื่น ๆ]"],
-    gallery: ["assets/project-13-gallery-1.jpg", "assets/project-13-gallery-2.jpg", "assets/project-13-gallery-3.jpg"]
+    gallery: ["assets/project-15-gallery-1.jpg", "assets/project-15-gallery-2.jpg", "assets/project-15-gallery-3.jpg"]
   },
   {
     id: "project-16",
@@ -270,7 +270,7 @@ const PROJECTS = [
     process: "พัฒนาแนวคิดและวางรูปแบบการเล่าเรื่อง ออกแบบภาพ มุมกล้อง และแสงให้สอดคล้องกับอารมณ์ของเรื่อง ก่อนดำเนินการตัดต่อและเกรดสีเพื่อสร้าง Mood & Tone ของผลงาน",
     contribution: "รับผิดชอบตำแหน่ง DOP / Editor / Colorist ดูแลการกำหนดแนวทางภาพ การถ่ายทำ การเรียบเรียงลำดับภาพ และการปรับโทนสีในขั้นตอน Post-production เพื่อควบคุมทิศทางของภาพยนตร์ทั้งหมด",
     credits: ["Software: DaVinci Resolve", "Source: [กล้อง / Log profile]", "Delivery: [Rec.709 / อื่น ๆ]"],
-    gallery: ["assets/project-13-gallery-1.jpg", "assets/project-13-gallery-2.jpg", "assets/project-13-gallery-3.jpg"]
+    gallery: ["assets/project-16-gallery-1.jpg", "assets/project-16-gallery-2.jpg", "assets/project-16-gallery-3.jpg"]
   },
   {
     id: "project-17",
@@ -287,7 +287,7 @@ const PROJECTS = [
     process: "วางแนวทางภาพ ออกแบบองค์ประกอบ มุมกล้อง และแสงให้เหมาะกับบรรยากาศของฉาก ก่อนนำฟุตเทจมาปรับแต่งสีเพื่อทดลองสร้าง Mood & Tone ในรูปแบบที่ต้องกา",
     contribution: "รับผิดชอบตำแหน่ง Director of Photography (DOP) ดูแลการออกแบบภาพ การจัดแสง การเลือกมุมกล้อง และควบคุมทิศทางด้าน Visual เพื่อให้ภาพสอดคล้องกับแนวคิดของงาน",
     credits: ["Software: DaVinci Resolve", "Source: [กล้อง / Log profile]", "Delivery: [Rec.709 / อื่น ๆ]"],
-    gallery: ["assets/project-13-gallery-1.jpg", "assets/project-13-gallery-2.jpg", "assets/project-13-gallery-3.jpg"]
+    gallery: ["assets/project-17-gallery-1.jpg", "assets/project-17-gallery-2.jpg", "assets/project-17-gallery-3.jpg"]
   },
   {
     id: "project-18",

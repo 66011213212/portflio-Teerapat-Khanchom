@@ -42,6 +42,70 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+
+// Image asset recovery -------------------------------------------------------
+// Netlify and other Linux-based hosts treat file names as case-sensitive.
+// These helpers keep the declared path as the first choice, then try common
+// extension and zero-padding variants if an image cannot be found.
+function getImageAssetCandidates(source) {
+  const original = safeText(source).trim();
+  if (!original) return [];
+
+  const cleanSource = original.split(/[?#]/)[0];
+  const slashIndex = cleanSource.lastIndexOf("/");
+  const directory = slashIndex >= 0 ? cleanSource.slice(0, slashIndex + 1) : "";
+  const filename = slashIndex >= 0 ? cleanSource.slice(slashIndex + 1) : cleanSource;
+  const dotIndex = filename.lastIndexOf(".");
+  const stem = dotIndex >= 0 ? filename.slice(0, dotIndex) : filename;
+  const declaredExtension = dotIndex >= 0 ? filename.slice(dotIndex) : "";
+
+  const stems = new Set([stem]);
+  const paddedMatch = stem.match(/^(project-)0(\d)(-.+)$/i);
+  const unpaddedMatch = stem.match(/^(project-)(\d)(-.+)$/i);
+  if (paddedMatch) stems.add(`${paddedMatch[1]}${paddedMatch[2]}${paddedMatch[3]}`);
+  if (unpaddedMatch && Number(unpaddedMatch[2]) < 10) {
+    stems.add(`${unpaddedMatch[1]}0${unpaddedMatch[2]}${unpaddedMatch[3]}`);
+  }
+
+  const extensions = [
+    declaredExtension,
+    ".jpg", ".JPG", ".jpeg", ".JPEG",
+    ".png", ".PNG", ".webp", ".WEBP"
+  ].filter(Boolean);
+
+  const candidates = [original];
+  stems.forEach((candidateStem) => {
+    extensions.forEach((extension) => {
+      candidates.push(`${directory}${candidateStem}${extension}`);
+    });
+  });
+
+  return [...new Set(candidates)];
+}
+
+function registerImageAssetFallbacks(root = document) {
+  root.querySelectorAll('img[src]:not([data-asset-fallback-ready])').forEach((image) => {
+    image.dataset.assetFallbackReady = "true";
+    const candidates = getImageAssetCandidates(image.getAttribute("src"));
+    let candidateIndex = 0;
+
+    const tryNextCandidate = () => {
+      candidateIndex += 1;
+      if (candidateIndex < candidates.length) {
+        image.src = candidates[candidateIndex];
+        return;
+      }
+      image.classList.add("asset-missing");
+      console.warn("Image file not found:", candidates[0]);
+    };
+
+    image.addEventListener("error", tryNextCandidate);
+    if (image.complete && image.naturalWidth === 0) {
+      requestAnimationFrame(tryNextCandidate);
+    }
+  });
+}
+
 // Work grid + category filters + pagination + hover video --------------------
 const projectGrid = document.querySelector("#project-grid");
 const projectPagination = document.querySelector("#project-pagination");
@@ -228,6 +292,7 @@ if (projectGrid && typeof PROJECTS !== "undefined") {
     }
 
     projectGrid.querySelectorAll("[data-project-link]").forEach((link) => link.addEventListener("click", saveWorkState));
+    registerImageAssetFallbacks(projectGrid);
     registerRevealElements(projectGrid);
     setupCardPreviewVideos();
     renderFilterControls();
@@ -536,6 +601,8 @@ if (detailRoot && typeof PROJECTS !== "undefined") {
     </section>
   `;
 
+  registerImageAssetFallbacks(detailRoot);
+
   // Start the main project video immediately when autoplay is permitted.
   // It remains muted so mobile and desktop browsers can autoplay it.
   const mainProjectVideo = detailRoot.querySelector(".project-main-video");
@@ -740,3 +807,7 @@ if (menuToggle && primaryNav) {
   window.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
   window.addEventListener("resize", () => { if (window.innerWidth > 900) closeMenu(); });
 }
+
+
+// Static images that were already present in the HTML.
+registerImageAssetFallbacks(document);
